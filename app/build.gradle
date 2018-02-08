@@ -5,6 +5,16 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    signingConfigs {
+        debug {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile rootProject.file('hellodebug.keystore')
+            storePassword 'android'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
     compileSdkVersion 26
 //    buildToolsVersion '26.0.3'
     defaultConfig {
@@ -25,13 +35,18 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug{
+            debuggable true
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+
+        }
     }
 //    externalNativeBuild {
 //        cmake {
 //            path "CMakeLists.txt"
 //        }
 //    }
-
 }
 
 dependencies {
